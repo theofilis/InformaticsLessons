@@ -1,0 +1,237 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{fontspec}
+\usepackage{float}
+\setmainfont{PF Universal}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Πρόβλημα \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{} % Header and footer within the environment
+}{
+\enterProblemHeader{} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Ερωτήσεις Σωστού-Λάθους\ \#5} % Assignment title
+\newcommand{\hmwkDueDate}{Σάββατο,\ Σεπτέμβριος\ 28,\ 2013} % Due date
+\newcommand{\hmwkClass}{ΑΝΕΠ} % Course/class
+\newcommand{\hmwkClassTime}{18:00} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Θεοφίλης} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Γεώργιος Θεοφίλης} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+
+\begin{homeworkProblem}
+\begin{enumerate}
+	\item Αν είναι δεδομένο ότι ένα αυτοκίνητο τρέχει με 150km/h τότε η πληροφορία είναι ότι τρέχει γρήγορα.
+	\item Ο υπολογισμός του εμβαδού ενός κύκλου αποτελεί πρόβλημα βελτιστοποίησης.
+	\item Ο υπολογισμός του εμβαδού του τραπεζίου, αποτελεί ένα δομημένο πρόβλημα.
+	\item Η μετακίνηση από μία πόλη Α σε μία πόλη Β, με αυτοκίνητο, όταν υπάρχει μόνο ένας δρόμος είναι ένα αδόμητο πρόβλημα.
+	\item Μία από τις πράξεις που μπορεί να εκτελέσει απευθείας ο υπολογιστής είναι ο πολλαπλασιασμός.
+	\item Ο υπολογισμός της δευτεροβάθμιας εξίσωσης, αποτελεί πρόβλημα απόφασης.
+	\item Κάθε αλγόριθμος πρέπει να πληρεί το κριτήριο της πληρότητας.
+	\item Αλγόριθμος ο οποίος θα εμφανίζει τα αποτελέσματά του στην οθόνη δεν πληρεί το κριτήριο της εξόδου.
+	\item Σε ένα διάγραμμα ροής, η εντολή διάβασε συμβολίζεται με ένα ορθογώνιο παραλληλόγραμμο.
+	\item Αριστερά του τελεστή εκχώρησης ($\leftarrow$), μπορεί να υπάρξει μόνο μεταβλητή.
+	\item Η λέξη διάβαζε μπορεί να αποτελέσει το όνομα μιας μεταβλητής.
+	\item Ο πολλαπλασιασμός σε ένα πρόγραμμα γραμμένο σε ΓΛΩΣΣΑ έχει μεγαλύτερη προτεραιότητα σε σχέση με την ύψωση σε δύναμη.
+	\item Η ΓΛΩΣΣΑ υποστηρίζει τρεις τύπους δεδομένων: τους ακέραιους, πραγματικούς και χαρακτήρες.
+	\item Η λογική πράξη Η είναι αληθής όταν έστω μία από τις δύο προτάσεις που συνοδεύει είναι αληθής.
+	\item Η λογική συνθήκη “α” < “β” είναι αληθής.
+	\item Η λογική παράσταση x ΚΑΙ ΟΧΙ(x) είναι πάντα ψευδής ανεξάρτητα από την τιμή τιμή του x.
+	\item Μία εντολή ΑΝ μπορεί προαιρετικά να συνοδεύεται από μία εντολή ΑΛΛΙΩΣ.
+	\item Κάθε εντολή εμφωλευμένων ΑΝ μπορεί να μετατραπεί σε ισοδύναμες ΑΝ…ΑΛΛΙΩΣ\_ΑΝ….ΑΛΛΙΩΣ.
+	\item Η εντολή ΑΡΧΗ\_ΕΠΑΝΑΛΗΨΗΣ…ΜΕΧΡΙΣ\_ΟΤΟΥ εκτελείται μέχρι η εντολή να γίνει αληθής.
+	\item Το διάγραμμα ροής ενός αλγορίθμου που έχει μία εντολή ΑΝ…ΑΛΛΙΩΣ θα περιέχει δύο ρόμβους.
+	\item Μία εντολή ΓΙΑ μπορεί να μετατραπεί σε ΟΣΟ ακόμα κι αν το βήμα της είναι αρνητικό.
+	\item Κάθε εντολή ΟΣΟ μπορεί να μετατραπεί σε μια ισοδύναμη εντολή ΓΙΑ.
+	\item Η εντολή ΓΙΑ μπορεί να χρησιμοποιηθεί για έλεγχο εγκυρότητας τιμής.
+	\item Όταν το βήμα σε μια εντολή ΓΙΑ μειώνεται κατά ένα τότε αυτό μπορεί να παραληφθεί.
+	\item Μία από τις λειτουργίες επί των δομών δεδομένων είναι η εισαγωγή ενός στοιχείου στην δομή.
+	\item Ένα από τα πλεονεκτήματα των πινάκων είναι ότι χρειάζονται λίγο χώρο στην μνήμη.
+	\item Για να προσδιορίσουμε την θέση σε έναν δισδιάστατο πίνακα χρειαζόμαστε μία μεταβλητή.
+	\item Οι πίνακες είναι μία δομή δεδομένων που στηρίζεται στην τεχνική δυναμικής παραχώρησης μνήμης.
+	\item Οι πίνακες καταναλώνουν μεγάλο χώρο στη μνήμη του υπολογιστή.
+	\item Η σειριακή αναζήτηση θα πρέπει να αποφεύγεται όταν ο πίνακας είναι μεγάλος.
+	\item H Fortran είναι μία γλώσσα, που ειδικεύεται στον προγραμματισμό εφαρμογών Τεχνητής Νοημοσύνης.
+	\item H C είναι μία γλώσσα, που ειδικεύεται στον προγραμματισμό συστημάτων.
+	\item Κατά τη μεταγλώττιση, το εκτελέσιμο πρόγραμμα παράγεται πριν το αντικείμενο.
+	\item Το αποτέλεσμα του συνδέτη-φορτωτή είναι το πηγαίο πρόγραμμα.
+	\item Η συγγραφή του πηγαίου προγράμματος και η διόρθωση των λαθών του γίνεται με την βοήθεια του συντάκτη.
+	\item Τα λογικά λάθη μπορούν να εντοπιστούν από το διερμηνευτή αλλά δεν μπορούν στον μεταγλωττιστή.
+	\item Οι γλώσσες μηχανής είναι στενά συνδεδεμένες με την αρχιτεκτονική του υπολογιστή.
+	\item Σε μια συνάρτηση μπορούμε να χρησιμοποιήσουμε την εντολή ΓΡΑΨΕ, ενώ σε μια διαδικασία όχι.
+	\item Ο αριθμός των τυπικών παραμέτρων κατά την κλήση ενός υποπρογράμματος πρέπει να είναι ίδιος με τον αριθμό των πραγματικών παραμέτρων στην δήλωση ενός προγράμματος.
+	\item Κάθε υποπρόγραμμα θα πρέπει να είναι ανεξάρτητο από άλλα υποπρογράμματα.
+	\item Μία συνάρτηση μπορεί να δεχτεί μία μόνο παράμετρο.
+	\item Μία συνάρτηση μπορεί να εμφανίσει στην οθόνη την τιμή που υπολόγισε.
+	\item Μία διαδικασία επιστρέφει στο πρόγραμμα που την έχει καλέσει τις τιμές όλων των παραμέτρων της
+\end{enumerate}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

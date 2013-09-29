@@ -1,0 +1,367 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{fontspec}
+\usepackage{float}
+\setmainfont{PF Universal}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Πρόβλημα \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{} % Header and footer within the environment
+}{
+\enterProblemHeader{} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Δομή Επιλογής\ \#2} % Assignment title
+\newcommand{\hmwkDueDate}{Σάββατο,\ Σεπτέμβριος\ 28,\ 2013} % Due date
+\newcommand{\hmwkClass}{ΑΝΕΠ} % Course/class
+\newcommand{\hmwkClassTime}{18:00} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Θεοφίλης} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Γεώργιος Θεοφίλης} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που θα δέχεται δύο αριθμούς α και β και εφόσον ο β δεν είναι μηδέν θα υπολογίζει και θα εμφανίζει το αποτέλεσμα της διαίρεσής τους.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γραφεί αλγόριθμος που θα διαβάζει τα χιλιόμετρα που διένυσε ένα αμάξι από την ημέρα αγοράς του και τα χιλιόμετρα που διένυσε τη στιγμή που έκανε το τελευταίο service. Στην συνέχεια να εμφανίζει το μήνυμα «SERVICE» αν το αυτοκίνητο διένυσε περισσότερα από 15000 χιλιόμετρα από το τελευταίο service.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που θα διαβάζει τα ονόματα δύο παικτών του μπάσκετ και το ύψος τους σε εκατοστά. Στην συνέχεια να εμφανίζει το όνομα του ψηλότερου σε μήνυμα της μορφής: «Ο ψηλότερος παίκτης είναι ο \textbf{όνομα παίκτη}»
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που θα διαβάζει έναν αριθμό ο οποίος θα αναπαριστά την ώρα σε 24ωρη μορφή και θα εμφανίζει τα επόμενα μηνύματα:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Αριθμός}  & \textbf{Χαρακτηρισμός} \\
+    0 - 4       &  Μεσάνυχτα       \\
+    5 - 6       & Ξημέρωμα         \\
+    7 - 11     & Πρωί             \\
+    12 - 15   & Μεσημέρι             \\
+    16 - 20   & Απόγευμα            \\
+    20 - 23   & Βράδυ            \\
+    \end{tabular}
+    \end{center}
+\end{table}
+
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένα ταξί χρεώνει κλιμακωτά τους πελάτες του βάσει της χιλιομετρικής απόστασης που θα ταξιδέψει με το επόμενο σύστημα χρεώσεων:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Απόσταση σε χιλιόμετρα}  & \textbf{Χρέωση} \\
+    0-2 χλμ.       & 0,5 ευρώ/χλμ       \\
+    2-5 χλμ.       & 0,4 ευρώ/χλμ         \\
+    5-10 χλμ.     & 0,3 ευρώ/χλμ            \\
+    >2 χλμ.        & 0,25 ευρώ/χλμ           \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Επίσης, το ταξί χρεώνει για κάθε διαδρομή ένα πάγιο κόστος 2€ καθώς επίσης κόστος 3€ εφόσον μεταφερθούν αποσκευές. Τέλος υπάρχει προσαύξηση 30\% στην συνολική τιμή εφόσον η διαδρομή γίνει από τα μεσάνυχτα (0:00) έως τις 6 το πρωί.
+
+Να γίνει αλγόριθμος που θα εμφανίζει στον χρήστη το μήνημα: «Πόσα χιλιόμετρα διένυσε το ταξί, τι ώρα παρέλαβε τον πελάτη, υπάρχουν αποσκευές;»
+
+Στην συνέχεια θα διαβάζει την χιλιομετρική απόσταση που διένυσε το ταξί, την ώρα που παρέλαβε τον πελάτη (να διαβάζεται μόνο η ώρα, όχι τα λεπτά) και την απάντηση στο ερώτημα αν διαθέτει αποσκευές ή όχι (θεωρήστε ως πιθανές τιμές τις ΝΑΙ και ΟΧΙ) και θα εμφανίζει τη χρέωση που προκύπτει.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένας 6ψήφιος κωδικός θεωρείται έγκυρος αν ισχύουν τα ακόλουθα:
+\begin{enumerate}
+	\item  Το άθροισμα του 1ου και του 2ου ψηφίου είναι ίσο με το 3ο ψηφίο
+	\item το υπόλοιπο της διαίρεσης του 3ου με το 4ο ψηφίο είναι ίσο με το 5ο ψηφίο μείον 2
+	\item και η διαφορά του 6ου με το 2ο ψηφίο είναι ίσο με 3.
+\end{enumerate}
+Να γίνει αλγόριθμος που θα διαβάζει έναν εξαψήφιο αριθμό και θα ελέγχει αν ο κωδικός είναι έγκυρος ή όχι
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που θα διαβάζει την ένδειξη ενός θερμομέτρου (σε βαθμούς Κελσίου) και θα εμφανίζει τα εξής μηνύματα:
+\begin{enumerate}
+	\item  «Φυσιολογικός» αν η θερμοκρασία είναι από 35,5 μέχρι 37
+	\item «Ζεστός» αν η θερμοκρασία είναι πάνω από 37 μέχρι 38
+	\item «Άρρωστος» αν η θερμοκρασία είναι πάνω από 38 μέχρι 42
+	\item  «Σφάλμα Μέτρησης» για οποιαδήποτε άλλη περίπτωση
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Η κλίμακα Beaufort (μποφόρ) είναι ένας εμπειρικός τρόπος μέτρησης της έντασης των ανέμων, που βασίζεται στην παρατήρηση των αποτελεσμάτων του ανέμου στη στεριά ή τη θάλασσα. Ανάλογα με την ταχύτητα του ανέμου, ο χαρακτηρισμός διαφέρει σύμφωνα με τον επόμενο πίνακα:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{lll}
+    \textbf{Κλίμακα Μποφόρ}  & \textbf{Χαρακτηρισμός Έντασης} & \textbf{Ταχύτητα σε km/h} \\
+    	0        & άπνοια &   έως 1  \\ 
+    	1        & σχεδόν άπνοια &   έως 5  \\
+    	2        & πολύ ασθενής  &       έως 11   \\
+    	3        & ασθενής  &     έως 19      \\
+	4        & σχεδόν μέτριος  &     έως 28     \\
+	5        & μέτριος   &      έως 38   \\
+	6        & ισχυρός   &     έως 49   \\
+	7        & σχεδόν θυελλώδης  &   έως 61     \\
+	8        & θυελλώδης   &    έως 74    \\
+	9        & πολύ θυελλώδης  &     έως 88   \\
+	10        & θύελλα &      έως 102    \\
+	11        & ισχυρή θύελλα &     έως 117     \\
+	12        & τυφώνας &     $\ge 118$     \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Να γίνει αλγόριθμος, που θα διαβάζει την ταχύτητα του ανέμου σε χιλιόμετρα ανά ώρα (km/h) και θα εμφανίζει τον χαρακτηρισμό του ανέμου και την κλίμακα της έντασης μποφόρ.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένας έμπορος ελαστικών διαθέτει τα ελαστικά του σε χονδρική πώληση, σύμφωνα με την επόμενη πολιτική:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Αριθμός ελαστικών}  & \textbf{Χρέωση} \\
+    	1 - 100       & 58 ευρώ / τεμάχιο     \\
+    	101 - 200       & 53 ευρώ / τεμάχιο         \\
+    	201 - 300     & 51 ευρώ / τεμάχιο            \\
+    	$>$ 300       & 49 ευρώ / τεμάχιο           \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Επιπρόσθετα ο έμπορος χρεώνει την μεταφορά των ελαστικών στο συνεργαζόμενο κατάστημα σύμφωνα με την επόμενη πολιτική:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Βάρος}  & \textbf{Χρέωση} \\
+    	έως και 1 τόνο      & 0,20 ευρώ/κιλό   \\
+    	πάνω από 1 τόνο, έως και 3       & 0,15 ευρώ/κιλό        \\
+    	πάνω από 3 τόνους    & 0,10 ευρώ/κιλό            \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Η χρέωση των μεταφορικών γίνεται κλιμακωτά. Δεδομένου ότι κάθε ελαστικό ζυγίζει περίπου 3,5 κιλά, να γίνει αλγόριθμος που θα διαβάζει τον αριθμό ελαστικών που θα παραγγείλει κάποιο κατάστημα και θα εκτυπώνει, το κόστος της παραγγελίας, το κόστος των μεταφορικών και την συνολική χρέωση.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Σύμφωνα με την νέα φορολογική νομοθεσία για το έτος 2011 τα τέλη κυκλοφορίας ενός αυτοκινήτου καθορίζονται με βάση την εξής πολιτική:
+
+Αν το αυτοκίνητο αγοράστηκε πριν το 2011, τα τέλη διαμορφώνονται βάσει των κυβικών εκατοστών του αυτοκινήτου όπως ορίζει ο παρακάτω πίνακας:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Κυβισμός}  & \textbf{Χρέωση} \\
+    	μέχρι 300 κ. εκ.      & 18 ευρώ   \\
+    	301 - 785 κ. εκ.       & 46 ευρώ        \\
+    	786 - 1357 κ. εκ.    & 112 ευρώ            \\
+	1358 - 1928 κ. εκ.      & 202 ευρώ   \\
+    	1929 - 2357 κ. εκ.      & 446 ευρώ        \\
+    	2358 κ. εκ και άνω.    & 580 ευρώ            \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Αν το αυτοκίνητο αγοράστηκε από το 2011 και μετά τα τέλη κυκλοφορίας υπολογίζονται βάσει των εκπεμπόμενων ρύπων, κλιμακωτά όπως ορίζει ο επόμενος πίνακας:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Εκπομπές Ρύπων}  & \textbf{Χρέωση ανά γρ.} \\
+    	έως 100 γρ. $CO_2$   & 0,50 ευρώ  \\
+    	101 - 150 γρ. $CO_2$       &1,00 ευρώ       \\
+    	151 - 200 γρ. $CO_2$    & 1,50 ευρώ            \\
+	201 - 250 γρ. $CO_2$      & 2,00 ευρώ   \\
+    	251 και άνω γρ. $CO_2$      & 2,00 ευρώ       \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Να γίνει αλγόριθμος που θα διαβάζει το έτος αγοράς ενός αυτοκινήτου και το ανάλογο μέγεθος (κυβικά εκατοστά ή εκπομπές ρύπων) και θα υπολογίζει την χρέωση για το αυτοκίνητο αυτό.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Η διαφορά ώρας ανάμεσα στην Ελλάδα και την Ινδία είναι 3 ώρες και 30 λεπτά. Αυτό σημαίνει πως όταν στην Ελλάδα η ώρα είναι 17.00 στην Ινδία είναι 20.30. Να γίνει αλγόριθμος που θα διαβάζει σε δύο μεταβλητές (μία για την ώρα και μία για τα λεπτά) την ώρα της Ελλάδας, σε 24ώρη μορφή, και θα εμφανίζει την ώρα της Ινδίας. π.χ. Ώρα Ελλάδας: 23.45, Ώρα Ινδίας: 3.15
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένα ηλεκτρονικό κατάστημα χρεώνει τις παραγγελίες του ανάλογα με τον προορισμό της παραγγελίας. Ο προορισμός της παραγγελίας καθορίζεται βάσει του Ταχυδρομικού Κωδικού αποστολής και οι χρεώσεις ορίζονται στον παρακάτω πίνακα.
+\\
+Επιπρόσθετα, παραγγελίες άνω των 100 ευρώ πρέπει να ασφαλίζονται σε περίπτωση απώλειας. Το κόστος της ασφάλειας ανέρχεται στο 5\% της αξίας της παραγγελίας, με μέγιστο ποσό τα 50 ευρώ. Για παράδειγμα αν η αξία της παραγγελίας είναι 2000 ευρώ, το 5% είναι 100 ευρώ. Σε αυτή την περίπτωση επειδή το κόστος της ασφάλειας υπερβαίνει τα 50 ευρώ, το κόστος θα πέσει στο μέγιστο, δηλαδή τα 50 ευρώ.
+\\
+Να γίνει αλγόριθμος που θα διαβάζει την αξία της παραγγελίας, τον ταχυδρομικό κωδικό αποστολής και θα εμφανίζει, το κόστος της αποστολής, το κόστος της ασφάλειας (αν δεν υπάρχει να εμφανίζεται μηδέν) και το συνολικό κόστος (αποστολή + ασφάλεια).
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Ταχυδρομικός Κωδικός}  & \textbf{Χρέωση} \\
+    	55000 -- 59000   & 4 ευρώ  \\
+    	61000 -- 66000       & 3 ευρώ       \\
+    	40000 -- 43000    & 3,5 ευρώ            \\
+	οπουδήποτε αλλού     & 5 ευρώ   \\
+    \end{tabular}
+    \end{center}
+\end{table}
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

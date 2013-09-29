@@ -1,0 +1,304 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{fontspec}
+\usepackage{float}
+\setmainfont{PF Universal}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassInstructor\ \hmwkClassTime): \hmwkTitle} % Top center head
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Πρόβλημα \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{} % Header and footer within the environment
+}{
+\enterProblemHeader{} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Πίνακες\ \#4} % Assignment title
+\newcommand{\hmwkDueDate}{Σάββατο,\ Σεπτέμβριος\ 28,\ 2013} % Due date
+\newcommand{\hmwkClass}{ΑΝΕΠ} % Course/class
+\newcommand{\hmwkClassTime}{18:00} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Θεοφίλης} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Γεώργιος Θεοφίλης} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+
+\begin{homeworkProblem}
+Ένα ηλεκτρονικό σύστημα καταγράφει τους πελάτες που επισκέπτονται ένα κατάστήματα μιας τράπεζας ανά ώρα. Καταχωρεί λοιπόν, στον πίνακα ΕΠΙΣΚΕΨΕΙΣ[6] τις επισκέψεις των πελατών για κάθε ένα από τα διαστήματα ωρών 8:00--9:00, 9:00--10:00, 10:00--11:00, 11:00--12:00, 12:00--13:00, 13:00--14:00.\\ \\
+Να γίνει αλγόριθμος που με δεδομένο των παραπάνω πίνακα θα εντοπίζει
+\begin{enumerate}
+	\item  το διάστημα με την μεγαλύτερη επισκεψιμότητα,
+	\item το διάστημα με την μικρότερη επισκεψιμότητα,
+	\item την ποσοστιαία διαφορά (\%) μεταξύ της μεγαλύτερης και της μικρότερης επισκεψιμότητας.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένα περιοδικό αυτοκινήτου θέλει να κατασκευάσει μια εφαρμογή για τους αναγνώστες του, η οποία θα τους προτείνει το αυτοκίνητο που τους ταιριάζει, ανάλογα με τις ανάγκες τους. Έτσι σε έναν πίνακα ΑΥΤΟ[200] βρίσκονται καταχωρημένα το ονόματα (μάρκα και μοντέλο) 200 αυτοκινήτων. Επίσης σε έναν πίνακα ΑΞΙΟΛΟΓΗΣΗ[7, 200] καταχωρούνται οι βαθμολογίες των αυτοκινήτων αυτών ως προς επτά βασικούς τομείς (Οδική Συμπεριφορά, Άνεση, Εξοπλισμός, Ασφάλεια, Επιδόσεις, Κατανάλωση καυσίμου, Χώροι αποσκευών). \\ \\
+Να γίνει αλγόριθμος που με δεδομένους τους παραπάνω πίνακες, θα διαβάζει τρεις αριθμούς από το 1 έως το 7. Κάθε ένας αριθμός αντιστοιχεί σε έναν από τους τομείς που ενδιαφέρουν τον αναγνώστη ως προς τα χαρακτηριστικά του αυτοκινήτου. Στη συνέχεια θα εμφανίζει τις 5 καλύτερες επιλογές.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Στον τελικό των 2000 μέτρων του στίβου συμμετέχουν 8 αθλητές. Κάθε αθλητής, προκειμένου να τερματίσει πραγματοποιεί 5 γύρους των 400 μέτρων. Να γίνει αλγόριθμος:
+\begin{enumerate}
+	\item  που θα διαβάζει τα ονόματα των αθλητών και τους χρόνους που χρειάστηκε ο καθένας, σε κάθε γύρω και θα τα καταχωρεί στους πίνακες ΟΝ[8] και ΧΡ[8, 5] (ο χρόνος θα καταχωρείται σε δευτερόλεπτα).
+	\item θα εντοπίζει και εμφανίζει το όνομα του νικητή.
+	\item  θα εντοπίζει και εμφανίζει το όνομα του τελευταίου.
+\end{enumerate}
+Υποθέστε πως δεν υπάρχουν αθλητές με ίδιο συνολικό χρόνο.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένα ταξιδιωτικό πρακτορείο, καταγράφει σε έναν πίνακα 10×10 τις 10 πόλεις στις οποίες η συνεργαζόμενη αεροπορική εταιρεία διαθέτει πτήσεις. Κάθε γραμμή αναπαριστά την πόλη άφιξης και κάθε στήλη αναπαριστά την πόλη προορισμού. Να γίνει πρόγραμμα που:
+\begin{enumerate}
+	\item θα καταχωρεί σε έναν πίνακα ΟΝ[10] τα ονόματα των 10 πόλεων, και σε έναν πίνακα ΔΡΟΜΟΛΟΓΙΑ[10,10] το κόστος μετάβασης από την πόλη της γραμμής i στην πόλη της στήλης j. Το κόστος μετάβασης μεταξύ ίδιων πόλεων ή μεταξύ πόλεων στις οποίες δεν ορίζεται δρομολόγιο είναι 0.
+	\item Θα διαβάζει την πόλη άφιξης, και την πόλη προορισμού. Σε περίπτωση που μία από τις δύο πόλεις δεν υπάρχει θα εμφανίζεται κατάλληλο μήνυμα.
+	\item  Θα εμφανίζει το κόστος για την απευθείας μετάβαση και αν αυτό δεν υπάρχει τότε θα ψάχνει για να βρει το φθηνότερο δρομολόγιο μέσω τρίτου προορισμού, όπου και θα το εμφανίζει.
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Σε μια πόλη υπάρχουνε συνολικά 15 χώροι στάθμευσης (πάρκινγκ). Να κάνετε πρόγραμμα που θα διαβάζει την απόσταση του κάθε πάρκιγνκ από το κέντρο και την τιμή που χρεώνει ανά ώρα. Στη συνέχεια να βρίσκετε το πάρκινγκ εκείνο που απέχει από το κέντρο από 600 μέτρα έως 1400 μέτρα. Αν υπάρχουνε περισσότερα από ένα να εμφανίζεται το πιο φθηνό.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Μια ποδοσφαιρική ομάδα διαθέτει 22 ποδοσφαιριστές για κάθε έναν από τους οποίους αποθηκεύουμε το ονοματεπώνυμό τους, τα λεπτά συμμετοχής τους και τη θέση στην οποία παίζουν (“Ε” για επίθεση, “Α” για άμυνα, “Κ” για κέντρο και “Τ” όταν ο παίκτης είναι τερματοφύλακας). Να γίνει αλγόριθμος που θα διαβάζει τα παραπάνω δεδομένα και θα εντοπίζει τους παίκτες που έχουν τα περισσότερα λεπτά συμμετοχής για κάθε θέση.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένας κωδικός χρήστη αποτελείται το πολύ από 10 χαρακτήρας και το ελάχιστο από 6. Ο κωδικός αυτός μπορεί να περιέχει οποιοδήποτε χαρακτήρα αλλά τουλάχιστον ένα σύμβολο (“\$’, “\#’, “@’, “!’, “\%’, “*’) και δύο αριθμούς (0-9). Επιπλέον απαγορεύεται η εισαγωγή του κενού. Να γίνει αλγόριθμος που θα ελέγχει την εγκυρότητα ενός κωδικού.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Στις βουλευτικές εκλογές μιας χώρας συμμετέχουν 10 κόμματα από 47 εκλογικά διαμερίσματα. Να γίνει πρόγραμμα που:
+\begin{enumerate}
+	\item Θα καταχωρεί τα ονόματα των κομμάτων που συμμετέχουν στις εκλογές
+	\item Θα καταχωρεί τις ψήφους όλων των κομμάτων από όλα τα εκλογικά διαμερίσματα
+	\item  Θα εντοπίζει το νικητήριο κόμμα των εκλογών (το κόμμα δηλαδή που συγκέντρωσε τις περισσότερες ψήφους)
+	\item Θα εντοπίζει τα κόμματα που συγκέντρωσαν περισσότερο από το 3\% των ψήφων επί της επικράτειας
+	\item Θα εντοπίζει ποιες εκλογικές περιφέρεις έχει κερδίσει το κάθε κόμμα;
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Ένα μεσιτικό γραφείο διατηρεί τα ακόλουθα δεδομένα για κάθε διαμέρισμα που διαθέτει προς πώληση:
+\begin{enumerate}
+	\item Όροφος (1, 2, 3, …)
+	\item Εμβαδό σε τετραγωνικά μέτρα (τ.μ)
+	\item Αριθμός υπνοδωματίων (1, 2, 3, …)
+	\item Πυλωτή (ναι/όχι)
+\end{enumerate}
+Να γίνει πρόγραμμα που:
+\begin{enumerate}
+	\item Θα ζητάει τα παραπάνω δεδομένα για την εισαγωγή 1000 διαμερισμάτων.
+	\item Θα ζητάει από έναν υπόψήφιο αγοραστή τις προτιμήσεις του: Πόσα τ.μ., πόσα υπνοδωμάτια και σε ποιο όροφο επιθυμεί να βρίσκεται το διαμέρισμά του. Ο υπολογιστής θα πρέπει να αναζητεί όλα τα διαμερίσματα που έχει καταχωρημένα και να επιστρέφει ακόμα και εκείνα που έχουν μια μικρή απόκλιση ως προς τα κριτήρια (+/- 30 τ.μ για το εμβαδό, +/- 1 όροφο και +/- 1 υπνοδωμάτιο)
+	\item  Τα αποτελέσματα θα πρέπει να επιστρέφονται ταξινομημένα ως προς την ακρίβεια. Δηλαδή ένα διαμέρισμα το οποίο ικανοποιεί πλήρως τα κριτήρια του χρήστη, προηγείται έναντι εκείνου που το εμβαδό του θα αποκλίνει μερικά τ.μ. από το επιθυμητό. Επιπρόσθετα το δεύτερο αυτό διαμέρισμα προηγείται ενός του οποίου γίνεται αναπροσαρμογή και στο εμβαδό και στον όροφο κ.ο.κ
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που με δεδομένο έναν πίνακα ακεραίων θα εντοπίζει:
+\begin{enumerate}
+	\item Το πλήθος των άρτιων αριθμών του πίνακα και το άθροισμα αυτών
+	\item Το πλήθος των περιττών αριθμών του πίνακα και το άθροισμα αυτών
+\end{enumerate}
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Στο παιχνίδι ΠΡΟ-ΠΟ οι παίκτες καλούνται να προβλέψουν σωστά τα αποτελέσματα 13 αγώνων ποδοσφαίρου. Για κάθε παιχνίδι σημειώνουν το σημέιο ’1′ αν προβλέπουν ότι θα κερδίσει η γηπεδούχος ομάδα, “Χ” αν ο αγώνας λήξει ισόπαλος και ’2′ αν κερδίσει η φιλοξενούμενη ομάδα. Υπάρχουν 3 κατηγορίες νικητών: Αυτοί που θα προβλέψουν σωστά και τους 13 αγώνες, αυτοί που θα προβλέψουν σωστά τους 12 από τους 13 και αυτούς που θα βρούν τους 11 από τους 13. \\ \\
+Να γίνει αλγόριθμος που θα δεδομένο έναν πίνακα ΠΡΟΒΛΕΨΕΙΣ[13, 3000] που περιέχει τις προβλέψεις 3000 παίκτών σε ένα δελτίο του ΠΡΟ-ΠΟ και έναν πίνακα ΑΠΟΤΕΛΕΣΜΑΤΑ[13] που περιέχει τα αποτελέσματα των αγώνων (’1′, “Χ” ή ’2′) να βρίσκει τον αριθμό των επιτυχόντων που προέβλεψαν σωστά τους 13 αγώνες, τους 12 αγώνες και τους 11 αγώνες. Αν είναι δεδομένα τα ποσά Π13, Π12, Π11 που θα δοθούν στους επιτυχόντες κάθε κατηγορίες να βρείτε τα χρήματα που θα κερδίσει ο κάθε παίκτης.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Σε ένα super market υπάρχουν 10.000 προϊόντα καταχωρημένα στον πίνακα ΠΡΟΙΟΝΤΑ[10000]. Διαθέσιμος επίσης είναι και ο πίνακας ΚΩΔΙΚΟΣ[10000] και ΤΙΜΗ[10000] που περιέχουν τον κωδικό και την τιμή του προϊόντος. Τέλος, υπάρχει και ο πίνακας ΕΚΠΤΩΣΗ[10000] που αναγράφει στην εκατοσταβάθμια κλίμακα την έκπτωση \% που υπάρχει για το κάθε προϊόν. Να γίνει αλγόριθμος που με δεδομένους τους ανωτέρω πίνακες να διαβάζει επαναληπτικά τον κωδικό ενός προϊόντος και να εμφανίζει στην οθόνη το όνομα του προϊόντος, την αρχική του τιμή και την τιμή μετά την έκπτωση. Η εισαγωγή προϊόντων θα σταματά όταν κωδικός προϊόντος δοθεί το «0″. Στο τέλος να εμφανίζεται η συνολική τελική τιμή των προϊόντων που αναζητήθηκαν προηγουμένως.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που με δεδομένο έναν πίνακα 1000 αριθμών θα βρίσκει και θα εμφανίζει τους 10 μικρότερους.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Να γίνει αλγόριθμος που με δεδομένο έναν πίνακα Α 500×100, θα διαβάζει 5 αριθμούς και θα βρίσκει το άθροισμα των γραμμών του πίνακα για τους αριθμούς που διαβάστηκαν. Για παράδειγμα αν διαβαστούν οι αριθμοί 5, 9, 15, 18 και 23 να βρίσκει το συνολικό άθροισμα των γραμμών 5, 9, 15, 18 και 23 του πίνακα Α.
+\end{homeworkProblem}
+
+\begin{homeworkProblem}
+Το παιχνίδι ΛΟΤΤΟ παίζεται ως εξής: Κάθε παίκτης συμπληρώνει ένα δελτίο με 6 διαφορετικούς αριθμούς (οι οποίοι βρίσκονται στο διάστημα 1 έως 49). Στην συνέχεια γίνεται κλήρωση όπου προκύπτουν οι 6 τυχεροί αριθμοί. Όσοι παίκτες προβλέψουν σωστά και τους 6 αριθμούς μοιράζονται το ποσό που δίνεται ως έπαθλο. Ομοίως το ίδιο γίνεται για όσους παίκτες προβλέψουν σωστά τους 5, 4, 3 από τους 6 αριθμούς. Συνεπώς σχηματίζονται 4 κατηγορίες νικητών ανάλογα με τον αριθμό των αριθμών που προέβλεψαν σωστά. \\ \\
+Ας υποθέσουμε ότι σε μία κλήρωση του ΛΟΤΤΟ θα δοθούν τα ακόλουθα χρηματικά έπαθλα:
+\begin{table}[H]
+    \begin{center}
+    \begin{tabular}{ll}
+    \textbf{Κατηγορία}  & \textbf{Χρηματικό έπαθλο} \\
+    Κατηγορία Α (6 στα 6)       & 250000 €   \\
+    Κατηγορία Β (5 στα 6)      & 200000 €     \\
+    Κατηγορία Γ (4 στα 6)     & 170000 €    \\
+    Κατηγορία Δ (3 στα 6)       & 150000 € \\
+    \end{tabular}
+    \end{center}
+\end{table}
+Να γίνει αλγόριθμος που με δεδομένο τον πίνακα ΤΥΧΕΡΟΙ\_ΑΡΙΘΜΟΙ[6] που περιέχει τους τυχερούς αριθμούς της κλήρωσης και του πίνακα ΑΡΙΘΜΟΙ\_ΠΑΙΚΤΩΝ[200000, 6] που περιέχει τους αριθμούς κάθε ενός από τους 200000 παίκτες, θα βρίσκει και θα εμφανίζει, πόσες επιτυχίες είχαμε σε κάθε κατηγορία, και τι κέρδη θα έχουν οι παίκτες κάθε κατηγορίας.
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
