@@ -1,0 +1,11 @@
+﻿\documentclass{article}
+\usepackage{fancyvrb}
+\begin{document}
+\begin{Verbatim}[showspaces=true,fontsize=\small]
+GAGTAATCCTTCACTTCAAGGCCAGTCTTCACATCTCATCAGA
+ACATCTCA
+ ACATCTCA
+  ACATCTCA
+    ACATCTCA
+\end{Verbatim}
+\end{document}
